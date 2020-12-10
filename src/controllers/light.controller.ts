@@ -4,7 +4,7 @@ import Light from '../models/light';
 
 const getLights = async (req: Request, res: Response) => {
     try{
-        const results = await Light.find(/*{"room": {"_id": req.params._id}}*/);
+        const results = await Light.find({}/*{"room": {"_id": req.params._id}}*/);
         return res.status(200).json(results);
     } catch (err) {
         return res.status(404).json(err);

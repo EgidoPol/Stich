@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 //Changes
 
 //API Routes
-app.use('lights', lightsRoutes);
+app.use('/lights', lightsRoutes);
 
 //Exportamos fichero como 'app'
 export default app;

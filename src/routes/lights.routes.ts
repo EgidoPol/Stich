@@ -4,7 +4,7 @@ import lightsController from "../controllers/light.controller"
 
 const router = Router();
 
-router.get('/getAll/',lightsController.getLights);
+router.get('/GetLights',lightsController.getLights);
 router.put('/AddLight', lightsController.newLight);
 router.post('/EditLight', lightsController.updateLight);
 router.delete('/DeleteLight/:id', lightsController.deleteLight);
