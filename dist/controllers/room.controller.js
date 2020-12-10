@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const room_1 = __importDefault(require("../models/room"));
 const getRooms = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const results = yield room_1.default.find({} /*{"room": {"_id": req.params._id}}*/);
+        const results = yield room_1.default.find({}).populate('lights');
         return res.status(200).json(results);
     }
     catch (err) {

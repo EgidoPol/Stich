@@ -6,6 +6,7 @@ import bodyParser from'body-parser';
 
 //Importamos fichero de rutas
 import lightsRoutes from './routes/lights.routes'
+import roomsRoutes from './routes/rooms.routes'
 //Inicializamos express
 const app = express();
 
@@ -23,6 +24,6 @@ app.use(bodyParser.json());
 
 //API Routes
 app.use('/lights', lightsRoutes);
-
+app.use('/rooms', roomsRoutes);
 //Exportamos fichero como 'app'
 export default app;

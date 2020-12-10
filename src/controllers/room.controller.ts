@@ -4,7 +4,7 @@ import Light from '../models/light';
 
 const getRooms = async (req: Request, res: Response) => {
     try{
-        const results = await Room.find({}/*{"room": {"_id": req.params._id}}*/);
+        const results = await Room.find({}).populate('lights');
         return res.status(200).json(results);
     } catch (err) {
         return res.status(404).json(err);

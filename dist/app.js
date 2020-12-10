@@ -10,6 +10,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const body_parser_1 = __importDefault(require("body-parser"));
 //Importamos fichero de rutas
 const lights_routes_1 = __importDefault(require("./routes/lights.routes"));
+const rooms_routes_1 = __importDefault(require("./routes/rooms.routes"));
 //Inicializamos express
 const app = express_1.default();
 //Configuración
@@ -24,5 +25,6 @@ app.use(body_parser_1.default.json());
 //Changes
 //API Routes
 app.use('/lights', lights_routes_1.default);
+app.use('/rooms', rooms_routes_1.default);
 //Exportamos fichero como 'app'
 exports.default = app;
