@@ -47,16 +47,18 @@ function deleteLight (req:Request,res:Response){
 }
 const updateLights = async (req:Request, res: Response) => {
     try{
-        const roomOfInterest = await Room.find({"room": {"_id": req.params.roomId}});
-        roomOfInterest.forEach(light => {
+
+        const roomOfInterest = await Room.find({"room": {"_id": req.params.id}});
+        roomOfInterest.forEach(Light => {
             const id: string = req.body._id;
             const colorR: number = req.body.colorR;
             const colorB: number = req.body.colorB;
             const colorG: number = req.body.colorG;
             const intensity: number = req.body.intensity;
-
+            console.log(id);
             Light.update({"_id": id}, {$set: {"colorR": colorR, "colorB": colorB, "colorG": colorG, 
-                                    "intensity": intensity}})});
+                                    "intensity": intensity}})
+        });
         return res.status(200).json(res);
     } catch (err) {
         return res.status(404).json(err);
