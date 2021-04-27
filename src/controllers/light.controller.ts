@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 import Light from '../models/light';
-
+import Room from '../models/room';
 
 const getLights = async (req: Request, res: Response) => {
     try{
@@ -13,7 +13,6 @@ const getLights = async (req: Request, res: Response) => {
 
 const newLight = async (req: Request, res: Response) => {
     const light = new Light({
-    
         "colorR": req.body.colorR,
         "colorB": req.body.colorB,
         "colorG": req.body.colorG,
@@ -46,4 +45,21 @@ function deleteLight (req:Request,res:Response){
         res.status(500).json(err);
     })
 }
-export default {getLights,newLight, updateLight, deleteLight};
+const updateLights = async (req:Request, res: Response) => {
+    try{
+        const roomOfInterest = await Room.find({"room": {"_id": req.params.roomId}});
+        roomOfInterest.forEach(light => {
+            const id: string = req.body._id;
+            const colorR: number = req.body.colorR;
+            const colorB: number = req.body.colorB;
+            const colorG: number = req.body.colorG;
+            const intensity: number = req.body.intensity;
+
+            Light.update({"_id": id}, {$set: {"colorR": colorR, "colorB": colorB, "colorG": colorG, 
+                                    "intensity": intensity}})});
+        return res.status(200).json(res);
+    } catch (err) {
+        return res.status(404).json(err);
+    }
+}
+export default {getLights,newLight, updateLight, deleteLight, updateLights};
