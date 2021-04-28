@@ -4,7 +4,7 @@ import Room from '../models/room';
 
 const getLights = async (req: Request, res: Response) => {
     try{
-        const results = await Light.find({}/*{"room": {"_id": req.params._id}}*/);
+        const results = await Light.find({"room": {"_id": req.params._id}});
         return res.status(200).json(results);
     } catch (err) {
         return res.status(404).json(err);
@@ -19,6 +19,7 @@ const newLight = async (req: Request, res: Response) => {
         "intensity": req.body.intensity
     });
     light.save().then((data) => {
+        
         return res.status(201).json(data);
     }).catch((err) => {
         return res.status(500).json(err);
@@ -47,16 +48,14 @@ function deleteLight (req:Request,res:Response){
 }
 const updateLights = async (req:Request, res: Response) => {
     try{
-
-        const roomOfInterest = await Room.find({"room": {"_id": req.params.id}});
+        const roomOfInterest = await Room.find({"room": {"_id": req.params.roomid}});
+        const colorR: number = req.body.colorR;
+        const colorB: number = req.body.colorB;
+        const colorG: number = req.body.colorG;
+        const intensity: number = req.body.intensity;
         roomOfInterest.forEach(Light => {
-            const id: string = req.body._id;
-            const colorR: number = req.body.colorR;
-            const colorB: number = req.body.colorB;
-            const colorG: number = req.body.colorG;
-            const intensity: number = req.body.intensity;
-            console.log(id);
-            Light.update({"_id": id}, {$set: {"colorR": colorR, "colorB": colorB, "colorG": colorG, 
+            const id: string = Light.id;
+            Light.updateOne({"_id": id}, {$set: {"colorR": colorR, "colorB": colorB, "colorG": colorG, 
                                     "intensity": intensity}})
         });
         return res.status(200).json(res);
