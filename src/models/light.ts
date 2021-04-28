@@ -12,6 +12,9 @@ const lightSchema = new Schema({
     },
     intensity:{
         type: Number
+    },
+    state:{
+        type: Number
     }
 });
 
@@ -21,6 +24,7 @@ export interface ILight extends Document {
     colorB: number;
     colorG: number;
     intensity: number;
+    state: number;
 }
 
 //Exportamos modelo para poder usarlo 
