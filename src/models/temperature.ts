@@ -6,12 +6,16 @@ const temperatureSchema = new Schema({
     },
     temperature:{
         type: Number
+    },
+    mode:{
+        type: String
     }
 });
 //Interfaz para tratar respuesta como documento
 export interface ITemperature extends Document {
     humidity: number;
     temperture: number;
+    mode:string;
 }
 
 //Exportamos modelo para poder usarlo 
