@@ -26,14 +26,23 @@ const newLight = async (req: Request, res: Response) => {
         "colorB": req.body.colorB,
         "colorG": req.body.colorG,
         "intensity": req.body.intensity,
-        "state":req.body.state
+        "state": 0
     });
-    light.save().then((data) => {
-        return res.status(201).json(data);
+    light.save().then((data) => { 
+        Room.findOneAndUpdate({_id: req.params.id}, {"$addToSet": {lights: light!._id}}).exec(function(err, result) {
+            console.log("Course Update: ",result);
+            if (err) {
+                // ...
+                return res.status(400).send({message: 'No se ha encontrado la habitacion'});
+            } else 
+                return res.status(201).json(data);            
+            
     }).catch((err) => {
         return res.status(500).json(err);
-    })
+        })
+    });
 }
+
 function updateLight (req: Request, res: Response){
     const id: string = req.body._id;
     const colorR: number = req.body.colorR;

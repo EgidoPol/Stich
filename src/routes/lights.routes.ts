@@ -7,7 +7,7 @@ const router = Router();
 router.get('/GetLights/:id',lightsController.getLights);
 router.put('/AddLight', lightsController.newLight);
 router.post('/EditLight/', lightsController.updateLight);
-router.post('/EditLights/:id', lightsController.updateLights);
+router.post('/EditLights/:id', lightsController.updateAllLights);
 router.delete('/DeleteLight/:id', lightsController.deleteLight);
 
 export default router;
