@@ -35,7 +35,7 @@ function updateRoom (req: Request, res: Response){
     })
 }
 function deleteRoom (req:Request,res:Response){
-    Room.deleteOne({"_id":req.params._id}).then((data: any) => {
+    Room.deleteOne({"_id":req.params.id}).then((data: any) => {
         res.status(200).json(data);
     }).catch((err: any) => {
         res.status(500).json(err);

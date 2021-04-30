@@ -11,8 +11,10 @@
   "author": "Rutol",
   "license": "ISC",
   "dependencies": {
+    "@types/debug": "^4.1.5",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "debug": "^4.3.1",
     "express": "^4.17.1",
     "mongoose": "^5.10.15",
     "morgan": "^1.10.0",
